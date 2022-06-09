@@ -1,14 +1,18 @@
 import cv2
 import os
 import imutils
+from gtts import gTTS
 
-personName = 'Gaby'
-dataPath = 'C:/Users/Maria/Desktop/recoFacialPyOpenCv/data'
+
+personName = 'MAURICIO ARAVENA'
+dataPath = 'C:/Users/Maria/Desktop/openCvPy/data'
 personPath = dataPath + '/' + personName
 
 if not os.path.exists(personPath):
     print('Carpeta creada: ',personPath)
     os.makedirs(personPath)
+    tts = gTTS('Aqui esta' + personName, lang='es-us')
+    tts.save( personPath +'/'+ personName + '.mp3')
 
 cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
 #cap = cv2.VideoCapture('Video.mp4')
@@ -30,7 +34,7 @@ while True:
         cv2.rectangle(frame, (x,y),(x+w,y+h),(0,255,0),2)
         rostro = auxFrame[y:y+h,x:x+w]
         rostro = cv2.resize(rostro,(150,150),interpolation=cv2.INTER_CUBIC)
-        cv2.imwrite(personPath + '/rotro_{}.jpg'.format(count),rostro)
+        cv2.imwrite(personPath + '/rostro_{}.jpg'.format(count),rostro)
         count = count + 1
     cv2.imshow('frame',frame)
 

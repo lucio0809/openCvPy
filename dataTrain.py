@@ -2,7 +2,7 @@ import cv2
 import os
 import numpy as np
 
-dataPath = 'C:/Users/Maria/Desktop/recoFacialPyOpenCv/data'#Cambia a la ruta donde hayas almacenado Data
+dataPath = 'C:/Users/Maria/Desktop/openCvPy/data'#Cambia a la ruta donde hayas almacenado Data
 peopleList = os.listdir(dataPath)
 print('Lista de personas: ', peopleList)
 
@@ -15,9 +15,14 @@ for nameDir in peopleList:
     print('Leyendo las imágenes')
 
     for fileName in os.listdir(personPath):
+        if fileName.split(".")[-1] not in ["jpg"]:
+            continue
+        
         print('Rostros: ', nameDir + '/' + fileName)
         labels.append(label)
         facesData.append(cv2.imread(personPath+'/'+fileName,0))
+        # if image is None:
+        #     continue
         #image = cv2.imread(personPath+'/'+fileName,0)
         #cv2.imshow('image',image)
         #cv2.waitKey(10)
@@ -28,17 +33,17 @@ for nameDir in peopleList:
 #print('Número de etiquetas 1: ',np.count_nonzero(np.array(labels)==1))
 
 # Métodos para entrenar el reconocedor
-face_recognizer = cv2.face.EigenFaceRecognizer_create()
+# face_recognizer = cv2.face.EigenFaceRecognizer_create()
 # face_recognizer = cv2.face.FisherFaceRecognizer_create()
-# face_recognizer = cv2.face.LBPHFaceRecognizer_create()
+face_recognizer = cv2.face.LBPHFaceRecognizer_create()
 
 # Entrenando el reconocedor de rostros
 print("Entrenando...")
 face_recognizer.train(facesData, np.array(labels))
 
 # Almacenando el modelo obtenido
-face_recognizer.write('modeloEigenFace.xml')
-#face_recognizer.write('modeloFisherFace.xml')
-# face_recognizer.write('modeloLBPHFace.xml')
+# face_recognizer.write('modeloEigenFace.xml')
+# face_recognizer.write('modeloFisherFace.xml')
+face_recognizer.write('modeloLBPHFace.xml')
 print("Modelo almacenado...")
 
