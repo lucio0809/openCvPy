@@ -1,6 +1,8 @@
 import cv2
 import os
+from gtts import gTTS
 from playsound import playsound
+
 
 
 
@@ -59,17 +61,48 @@ while True:
         if result[1] < 70:
             cv2.putText(frame,'{}'.format(imagePaths[result[0]]),(x,y-25),2,1.1,(0,255,0),1,cv2.LINE_AA)
             cv2.rectangle(frame, (x,y),(x+w,y+h),(0,255,0),2)
-            #print(imagePaths)
+            # print(imagePaths[result[0]])
             
             name = (imagePaths[result[0]])
-            while name == name :
-                playsound(name+'.mp3')
-                break 
+
+# ***********************************************************************************************
+
+            def nombre (name):
+
+                    if name == 'Gabriel Rodriguez' or name == 'Javiera Tuki':
+
+                        tts = gTTS('Aqui esta' + name, lang='es-us')
+                        tts.save("persona.mp3")
+                        playsound('persona.mp3')
+                        os.remove('persona.mp3')
+                        return nombre   
+
+            while name != name:
+                nombre(name)
+
+# ***********************************************************************************************
+
+
+
+
+                # return nombre
+            
+            # while name == name:
+
+            #     tts = gTTS('Aqui esta' + name, lang='es-us')
+            #     with open ("persona.mp3", "wb") as archivo:
+            #         tts.save(archivo)
+            # else:
+
+            #     playsound ('persona.mp3')
+
+            
 
         else:
             cv2.putText(frame,'Desconocido',(x,y-20),2,0.8,(0,0,255),1,cv2.LINE_AA)
             cv2.rectangle(frame, (x,y),(x+w,y+h),(0,0,255),2)
-            playsound('Desconocido.mp3')
+            
+            # playsound('Desconocido.mp3')
 
         
     cv2.imshow('frame',frame)

@@ -1,18 +1,19 @@
 import cv2
 import os
 import imutils
-from gtts import gTTS
 
 
-personName = 'MAURICIO ARAVENA'
+
+personName = 'Gabriel Rodriguez'
 dataPath = 'C:/Users/Maria/Desktop/openCvPy/data'
 personPath = dataPath + '/' + personName
 
 if not os.path.exists(personPath):
     print('Carpeta creada: ',personPath)
     os.makedirs(personPath)
-    tts = gTTS('Aqui esta' + personName, lang='es-us')
-    tts.save( personPath +'/'+ personName + '.mp3')
+    # tts = gTTS('Aqui esta' + personName, lang='es-us')
+    # tts.save(personPath +'/'+ personName +'mp3')
+
 
 cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
 #cap = cv2.VideoCapture('Video.mp4')
